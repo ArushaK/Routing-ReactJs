@@ -1,43 +1,46 @@
 import MeetupList from "../components/meetups/MeetupList";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 
-function AllMeetup(){
-  const [isLoading,setIsLoading]=useState(true);
-  const [loadedMeetups,setLoadedMeetups]=useState([]);
+function AllMeetup() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedMeetups, setLoadedMeetups] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setIsLoading(true);
-    fetch('https://meetup-react-bb116-default-rtdb.firebaseio.com/meetups.json').then(response=>{
-    return response.json();
-  }).then(data=>{
-    const meetups=[];
-    for(const key in data){
-      const meetup={
-        id:key,
-        ...data[key]
-      };
-      meetups.push(meetup);
-    }
-      setIsLoading(false);
-      setLoadedMeetups(meetups);
-  });
-  },[]);
+    fetch("https://meetup-react-bb116-default-rtdb.firebaseio.com/meetups.json")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const meetups = [];
+        for (const key in data) {
+          const meetup = {
+            id: key,
+            ...data[key],
+          };
+          meetups.push(meetup);
+        }
+        setIsLoading(false);
+        setLoadedMeetups(meetups);
+      });
+  }, []);
 
-  
-
-  if(isLoading){
-    return <section>
-      <p>Loading...</p>
-    </section>
+  if (isLoading) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    );
   }
-        
-    return <section>
-        <h1>All Meetups</h1>
-        <ul>
+
+  return (
+    <section>
+      <h1>All Meetups</h1>
+      <ul>
         <MeetupList meetups={loadedMeetups} />
-        </ul>
-        
+      </ul>
     </section>
+  );
 }
 
 export default AllMeetup;

@@ -1,15 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
-import './index.css';
-import App from './App';
-import { FavContextProvider } from './store/fav-context';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import App from "./App";
+import { FavContextProvider } from "./store/fav-context";
 
 ReactDOM.render(
   <FavContextProvider>
-  <BrowserRouter><App /></BrowserRouter>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </FavContextProvider>,
- 
-  document.getElementById('root')
-);
 
+  document.getElementById("root")
+);
